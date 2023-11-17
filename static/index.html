@@ -13,7 +13,8 @@
     <div id="app">
         <div id="jxgbox" class="jxgbox"></div>
         <div id="guess-box">
-            y = <input value="x" placeholder="x" />
+            <span>y =</span> <input id="guessInput" value="x" oninput="inputHandler()" placeholder="x" />
+            <button id="guess">Guess!</button>
         </div>
     </div>
     <style>
@@ -26,13 +27,34 @@
             height: 100vh;
         }
 
-        .guess-box {
+        #guess-box {
             position: fixed;
-            bottom: 10px;
-            right: 10px;
+            bottom: 20px;
+            left: 10px;
+            width: 50vw;
+            display: inline-flex;
+        }
+
+        #guess-box span {
+            white-space: nowrap;
+            margin-right: 10px;
+            font-weight: bold;
+            width: 10%;
+            display: flex;
+            justify-content: center;
+        }
+
+        #guess-box input {
+            width: 60%;
+        }
+
+        #guess-box button {
+            width: 30%;
+            background-color: aliceblue;
         }
     </style>
     <script src="/runtime" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

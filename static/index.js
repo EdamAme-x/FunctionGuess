@@ -26,9 +26,35 @@ window.addEventListener("load", (event)=>{
 	const jsx = JXG.JSXGraph.initBoard("jxgbox", 
 		{axis: true, boundingbox: [-view, view, view, -view]});
     const answer = genFunction(parseInt(Date.now().toString().slice(-1) - 5));
-    const targetGuess = answer.toString().replace(/x \=\> /, "").trim().toLowerCase();
+    // any => any
 
-    
+    globalThis.answer = answer;
 
     jsx.create("functiongraph", [answer], {strokeColor:"purple"});
 });
+
+let guessFunc = "x";
+
+function inputHandler() {
+    guessFunc = document.getElementById("guessInput").value;
+}
+
+function Guess() {
+    const sed = Math.floor(Math.random() * 100);
+    const guessResult = eval(`x => ${guessFunc}`)(sed);
+    const targetResult = answer(sed);
+
+    if (guessResult === targetResult) {
+        Swal.fire({
+            icon: "success",
+            text: "Good! : " + `y = ${guessFunc}`
+        })
+    }else {
+        Swal.fire({
+            icon: "error",
+            text: "Bad!"
+        })
+    }
+}
+
+document.getElementById("guess").addEventListener("click", Guess)
