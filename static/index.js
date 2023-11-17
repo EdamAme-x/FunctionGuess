@@ -1,8 +1,34 @@
 console.log("Function Guess / By @amex2189");
 
-window.addEventListener("load", (event)=>{
-	const jsx = JXG.JSXGraph.initBoard("jxgbox", 
-		{axis: true, boundingbox: [-15, 15, 15, -15]});
+const assets = [
+    seed => {
+        return x => x * seed
+    },
+    seed => {
+        return x => x ** seed
+    },
+    seed => {
+        return x => x ** seed - Math.floor(Math.random() * 3)
+    }
+]
 
-    jsx.create("functiongraph", [x=>Math.sqrt(Math.sin(x/2))], {strokeColor:"purple"});
+function genFunction(seed) {
+
+    if (seed === 0) {
+        return x => x**x - Math.floor(Math.random() * 3)
+    }
+
+    return assets[Math.floor((Math.random() * (assets.length - 1)))](seed);
+}
+
+window.addEventListener("load", (event)=>{
+    const view = 50;
+	const jsx = JXG.JSXGraph.initBoard("jxgbox", 
+		{axis: true, boundingbox: [-view, view, view, -view]});
+    const answer = genFunction(parseInt(Date.now().toString().slice(-1) - 5));
+    const targetGuess = answer.toString().replace(/x \=\> /, "").trim().toLowerCase();
+
+    
+
+    jsx.create("functiongraph", [answer], {strokeColor:"purple"});
 });
