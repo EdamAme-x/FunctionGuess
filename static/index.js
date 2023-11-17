@@ -1,0 +1,1 @@
+console.log("Function Guess / By @amex2189");

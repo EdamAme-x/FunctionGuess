@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.2.3",
+    "fs": "^0.0.1-security",
+    "hono": "^3.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.1",
+    "tsx": "^3.12.2"
+  }
+}
